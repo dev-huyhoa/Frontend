@@ -1,0 +1,49 @@
+   <link rel="stylesheet" href="./CSS/exam.css">
+   <div class="container">
+        <div class="row">
+              <article class="col-sm-12">  
+              
+                <h2 class="text-center">{{min}}:{{sec}}</h2>
+                <div class="card mt-2" ng-repeat="ch in question|limitTo:1:start">
+                  <div class="card-header">
+                    <i class="fas fa-book"></i><span> Câu Hỏi môn học</span>
+                    <button style="float: right;" class="btn btn-info float-right" ng-click="Sum()"> Nộp bài</button>
+                  </div>
+                  <div class="card-body">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <h1>Câu hỏi 1</h1>
+                          <h4>{{question[0].Text}}</h4>
+                          <div class="form-check" ng-repeat="rdb in question[0].Answers">
+                            <input type="radio" name="question[0].AnswerId" value="rdb.Text">
+                            <label >{{rdb.Text}}</label>
+                          </div>
+                        </div>
+                        <div class="carousel-item" ng-repeat="item in question" ng-if="$index != 0 ">
+                          <h1>Câu hỏi {{$index + 1}}</h1>
+                          <h4>{{question[$index].Text}}</h4>
+                          <br>
+                          <div class="form-check" ng-repeat="rdb in item.Answers">
+                            <input type="radio" name="{{item.AnswerId}}" value="" ng-click="EventMark(rdb.Id, $parent.$index, item.AnswerId)">
+                            <label >{{rdb.Text}}</label>
+                          </div>
+                        </div> 
+                      </div>
+                      <div>
+                        <button ng-repeat="item in question" class=" pagina-item text-white bg-danger border border-danger" href="#carouselExampleIndicators" data-slide-to="{{$index}}" >{{$index + 1}}</button>
+                      </div>    
+                      
+                    <div class="text-center pt-3">
+                      <!-- <button class="prevtab btn btn-danger" ng-click="first()">First</button> -->
+                      <button class="prevtab btn btn-danger" href="#carouselExampleIndicators"  data-slide="prev">Prev</button>
+                      <button class="nexttab btn btn-info" href="#carouselExampleIndicators"  data-slide="next">Next</button>
+                    </div>
+                    </div>
+                  </div>            
+                </div>
+                <br>
+                </article>       
+          </div>
+      </div>
+        

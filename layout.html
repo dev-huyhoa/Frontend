@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/dangki.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.8.0/angular-route.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body ng-app="myapp">
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+  <div class="container-fluid mb-2">
+    <a class="navbar-brand" href="layout.html">
+      <img src="./CSS/banner/logofpt_png.png" alt="..." height="60px">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarSupportedContent">
+      <ul class="navbar-nav ">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="#!gioithieu">Giới thiệu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#!lienhe">Liên hệ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Góp ý</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#!hoidap">Hỏi đáp</a>
+        </li>
+  
+        <li ng-controller="checkdn" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-user"></i> {{fullname!=null?fullname:"Tài khoản"}}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <li><a ng-if="fullname==null" class="dropdown-item" href="#!DangKi"><i class="fa-solid fa-user"></i> Đăng ký</a></li>
+            <li><a ng-if="fullname==null" class="dropdown-item" onclick="loginne()"><i class="fa-solid fa-user"></i> Đăng nhập</a></li>
+            <li><a ng-click="dangxuat()" ng-if="fullname!=null" class="dropdown-item" href=""><i class="fa-solid fa-right-to-bracket"></i> Đăng xuất</a></li>
+            <li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Header -->
+    <header class="masthead d-flex align-items-center">
+        <div class="container px-4 px-lg-5 text-center">
+            <h1 class="mb-1 text">CAO ĐẲNG FPT POLYTECHNIC</h1>
+            <h3 class="mb-5 text"><em>Thực Học - Thực Nghiệp</em></h3>
+        </div>  
+    </header>
+
+<!-- layout -->
+    <main class="row my-2" ng-view>
+
+    </main>
+
+<!--FOOTER-->
+      <div class="mt-5">
+        <footer class="text-center text-white" style="background-color: #f1f1f1;">
+        <!-- Grid container -->
+        <div class="container pt-4">
+          <!-- Section: Social media -->
+          <section class="mb-4">
+            <!-- Facebook -->
+            <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+      
+            <!-- Twitter -->
+            <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-twitter"></i
+            ></a>
+      
+            <!-- Google -->
+            <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-google"></i
+            ></a>
+      
+            <!-- Instagram -->
+            <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-instagram"></i
+            ></a>
+      
+            <!-- Linkedin -->
+            <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+            <!-- Github -->
+            <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-github"></i
+            ></a>
+          </section>
+          <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+      
+        <!-- Copyright -->
+        <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2020 Copyright: fpt@hcm123
+        </div>
+        <!-- Copyright -->
+      </footer>
+        
+      </div>
+      
+    <script src="./db/Students.js"></script>
+    <script>
+      var app = angular.module("myapp",["ngRoute"]);
+        
+          app.config(function($routeProvider){
+            $routeProvider
+            .when("/login",{templateUrl:"login.html",controller:"myctrl"})
+            .when("/DangKi",{templateUrl:"sign_up.html",controller:"myctrl"})
+            .when("/tracnghiem/:idMH/:tenMH",{templateUrl:"emxam.html",controller:"myExam"})
+            .when("/gioithieu",{templateUrl:"gioithieu.html",controller:"myctrl"})
+            .when("/lienhe",{templateUrl:"lienhe.html",controller:"myctrl"})
+            .when("/hoidap",{templateUrl:"hoidap.html",controller:"myctrl"})
+            .when("/exam/:idMH/:tenMH",{templateUrl:"exam.html",controller:"myExam"})
+            .when("/nopbai",{templateUrl:"nopbai.html",controller:"nopbai"})
+            .otherwise({templateUrl:"index.html",controller:"myExam"})
+          })
+
+
+          app.controller("myExam",function($scope, $http, $interval, $routeParams){
+          $scope.cacmonhoc=[];  
+            
+          $http.get("./db/Subjects.js").then(function (d){
+            $scope.cacmonhoc = d.data; 
+            console.log($scope.cacmonhoc.length);   
+          });
+  
+          
+          $scope.idMH = $routeParams.idMH;
+          $scope.tenMH = $routeParams.tenMH;
+          $scope.pageSize = 4;
+          $scope.batdau = 0;
+
+
+            // nut chuyen cho trang index
+            $scope.trangdau = function () {
+                $scope.batdau = 0;
+            }
+
+            $scope.next = function () {
+            $scope.batdau += 4;
+            if ($scope.batdau == $scope.cacmonhoc.length) { 
+                $scope.trangdau();                   
+              }   
+            }
+            $scope.prev = function () {
+              $scope.start += 1;
+              if ($scope.start == 77) { $scope.start = 0 }
+             
+               
+            }
+            $scope.trangcuoi = function () {
+                sotrang = Math.ceil($scope.cacmonhoc.length / $scope.pageSize);
+                $scope.batdau = (sotrang - 1) * $scope.pageSize;            
+            }  
+
+            $scope.$parent.question = [];
+             if($scope.idMH != null)
+              {
+                    $http.get("./db/Quizs/" +$scope.idMH +".js").then(function(q) 
+                { 
+                  $scope.question = q.data;
+
+                })
+              }  
+              //kiem tra dang nhap chua
+              $scope.exam = function(idmh,tenmh){
+              if(sessionStorage.getItem("fullname") != null)
+              {
+                document.location = `layout.html#!/exam/${idmh}/${tenmh}`;
+              console.log($scope.question.length)
+              }
+              else{
+               loginne(); 
+              }
+            }
+
+            $scope.EventMark = function(e, index, id){           
+              if (e == id) {
+                $scope.listresult[index] = 1
+              }
+              else{
+                $scope.listresult[index] = 0
+              }
+                console.log($scope.listresult);
+                console.log(id);                       
+            }
+
+            $scope.Sum = function(){           
+              for (let index = 0; index <  $scope.listresult.length; index++) {
+                if($scope.listresult[index]==1)
+                    $scope.point += $scope.listresult[index];
+              }
+              console.log($scope.point);
+              localStorage.setItem("mark",$scope.point);
+              localStorage.setItem("length",$scope.question.length);
+
+              document.location = "#!nopbai";
+            }
+            $scope.point = 0;
+            $scope.listresult = [];
+           
+
+
+
+              $scope.min = '--';
+            $scope.sec = '--';
+            $scope.countDown = 300;
+            $scope.timeOut = -1;
+            //$scope.timeOut = 0;
+            var startQuiz = $interval(function () {
+            var min = parseInt($scope.countDown / 60, 10)
+            var sec = parseInt($scope.countDown % 60, 10);
+            $scope.min = min < 10 ? "0" + min : min;
+            $scope.sec = sec < 10 ? "0" + sec : sec;
+            console.log($scope.countDown--);
+            $scope.timeOut++;
+            }, 1000, $scope.countDown);
+            $scope.$on('$destroy', function () {
+              if (angular.isDefined(startQuiz)) {
+                  $interval.cancel(startQuiz);
+                  startQuiz = undefined;
+            }
+          })
+    });
+
+    
+            app.controller("myctrl", function($scope){
+              $scope.student = {};
+              $scope.index = -1;
+              //dang ki
+              $scope.DangKi = function(){
+                try{
+                  listStudent.push(angular.copy($scope.student));
+                  $scope.log(listStudent);
+                }catch(e){
+                  console.log(e.message);
+                }
+                finally{
+                  alert("Thêm sinh viên thành công");
+                  document.location = "layout.html#!/login"
+                }
+              }
+              //dang nhap
+              $scope.Login = function(){
+                var user = $scope.user;
+                var pass = $scope.pass;
+                var flag = false;
+                var sv;
+                for(var i = 0; i < listStudent.length; i++){
+                    sv = listStudent[i];
+                    if(user == sv.username && pass == sv.password){
+                      flag = true;
+                      sessionStorage.setItem("username", sv.username);
+                      sessionStorage.setItem("fullname", sv.fullname);
+                      sessionStorage.setItem("gender", sv.gender);
+                      sessionStorage.setItem("birthday", sv.birthday);
+                      sessionStorage.setItem("schoolfee", sv.schoolfee);
+                      sessionStorage.setItem("marks", sv.marks);
+                      sessionStorage.setItem("email", sv.email);          
+                      document.location = "layout.html";
+                      break;
+                    }
+                }
+                if(flag==true){
+                  alert("Đăng nhập thành công");
+                }
+                else{
+                  alert("Sai tên đăng nhập hoặc mật khẩu");
+                }
+              }
+            })
+
+            app.controller("checkdn",function($scope){
+            $scope.fullname = "Tài Khoản";
+            $scope.flag = false;
+            var ht =  sessionStorage.getItem("fullname");                
+            if ( ht!="") {
+                $scope.fullname = ht;
+                $scope.flag = true;             
+            }
+            else{$scope.fullname = "Tài Khoản";$scope.flag = false;}
+            if (ht!=null) {
+                $scope.tk = null;
+            }
+           $scope.dangxuat= function(){
+             sessionStorage.clear();
+             document.location = "layout.html";
+           }
+          
+         
+    });
+    function loginne(){
+      document.location="#!login";
+    }
+    app.controller("nopbai",function($scope){
+            // $scope.diemtong = ; 
+            var socaulamduoc = localStorage.getItem("mark");
+            $scope.point = localStorage.getItem("mark");
+            $scope.maxtn =  localStorage.getItem("length"); 
+            $scope.diemtong = (socaulamduoc*(10/$scope.maxtn));
+      
+          })  
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script href="./db/mark.js"></script>
+</body>
+</html>
+
+
+
+

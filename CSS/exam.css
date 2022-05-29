@@ -1,0 +1,13 @@
+.pagina-item {
+    width: 40px;
+    align-items:center !important;
+    text-align:center;
+    margin-right: 5px;
+    margin-bottom: 15px;
+    margin-top: 2px;
+    padding-top: 2px;
+    height: 30px !important;
+    font-size:18px !important;
+    border-radius: 2px;
+    cursor: pointer;
+}
